@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estudiante index
+{% endblock %}
+
+{% block body %}
+	<div class="container m-0 mx-auto">
+		<h1 class="text-center font-bold">Estudiantes</h1>
+
+		<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800">
+			<thead>
+				<tr class="text-left border-b-2 border-gray-300">
+					<th class="px-4 py-3">Id</th>
+					<th class="px-4 py-3">Nombre</th>
+					<th class="px-4 py-3">Apellido1</th>
+					<th class="px-4 py-3">Apellido2</th>
+                    <th class="px-4 py-3">Número de cursos</th>
+                    <th class="px-4 py-3">Nota Media</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for estudiante in estudiantes %}
+
+					<tr class="bg-gray-100 border-b border-gray-200">
+
+						<td class="px-4 py-3">{{ estudiante.id }}</td>
+						<td class="px-4 py-3">{{ estudiante.nombre }}</td>
+						<td class="px-4 py-3">{{ estudiante.apellido1 }}</td>
+						<td class="px-4 py-3">{{ estudiante.apellido2 }}</td>
+                        <td class="px-4 py-3">{{ estudiante.notas|length }}</td>
+                        {% set sumaNotas = 0 %}
+                        {% for nota in estudiante.notas %}
+                            {% set sumaNotas = sumaNotas + nota.nota %}
+                        {% endfor %}
+                        {% set notaMedia = sumaNotas / estudiante.notas|length %}
+                        <td class="px-4 py-3">{{ notaMedia }}</td>    
+						<td class="px-4 py-3">
+							<a class="btn-show" href="{{ path('estudiante_show', {'id': estudiante.id}) }}">Ver notas</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

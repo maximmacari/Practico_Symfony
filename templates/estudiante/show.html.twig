@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Estudiante
+{% endblock %}
+
+{% block body %}
+	<div class="container m-0 m-auto">
+
+		<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-200 text-gray-800">
+			<thead>
+				<tr class="text-left border-b-2 border-gray-300">
+					<th class="px-4 py-3">Curso</th>
+					<th class="px-4 py-3">Duracion (horas)</th>
+					<th class="px-4 py-3">Nota</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				{% for nota in estudiante.notas %}
+				<tr class="bg-gray-100 border-b border-gray-200">
+					<td class="px-4 py-3">{{ nota.curso.nombre }}</td>
+					<td class="px-4 py-3">{{ nota.curso.duracion }}</td>
+					<td class="px-4 py-3">{{ nota.nota }}</td>
+				</tr>	
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a class="btn-return" href="{{ path('estudiante_index') }}">Back to list</a>
+
+	</div>
+
+{% endblock %}
